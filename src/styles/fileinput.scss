@@ -1,0 +1,159 @@
+@use './variables' as *;
+
+// File input component using BEM methodology
+.file-input {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  width: 100%;
+  max-width: min(400px, 90vw);
+  
+  &__label {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    font-size: clamp(0.8rem, 2vw, 0.875rem);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  &__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: clamp(100px, 15vw, 120px);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    
+    &:hover {
+      border-color: var(--color-primary);
+      background-color: rgba(99, 102, 241, 0.05);
+    }
+    
+    &--dragover {
+      border-color: var(--color-accent);
+      background-color: rgba(34, 211, 238, 0.05);
+    }
+    
+    &--has-file {
+      cursor: pointer;
+      border-style: solid;
+      border-color: var(--color-success);
+      background-color: rgba(16, 185, 129, 0.1);
+      
+      &:hover {
+        border-color: var(--color-success);
+        background-color: rgba(16, 185, 129, 0.15);
+      }
+    }
+    
+    &--has-error {
+      cursor: pointer;
+      border-style: solid;
+      border-color: var(--color-error);
+      background-color: rgba(239, 68, 68, 0.1);
+      
+      &:hover {
+        border-color: var(--color-error);
+        background-color: rgba(239, 68, 68, 0.15);
+      }
+    }
+  }
+  
+  &__input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  &__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-muted);
+    text-align: center;
+    padding: var(--spacing-md);
+    pointer-events: none;
+  }
+  
+  &__icon {
+    width: 48px;
+    height: 48px;
+    opacity: 0.6;
+  }
+  
+  &__text {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    
+    &--primary {
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+    
+    &--secondary {
+      color: var(--color-text-muted);
+      font-size: 0.75rem;
+    }
+  }
+  
+  &__filename {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    background-color: transparent;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    width: 100%;
+    
+    &-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      
+      &--success {
+        color: var(--color-success);
+      }
+      
+      &--error {
+        color: var(--color-error);
+      }
+    }
+    
+    &-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+  }
+}
+
+.file-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 4vw, 2rem);
+  width: 100%;
+  max-width: min(1000px, 95vw);
+  
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
+    width: 100%;
+    justify-items: center;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+}

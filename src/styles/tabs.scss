@@ -1,0 +1,101 @@
+@use './variables' as *;
+
+.tabs {
+  margin-top: clamp(1.5rem, 4vw, 2rem);
+  width: 100%;
+  max-width: min(1400px, 95vw);
+  
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(0.25rem, 1vw, 0.5rem);
+    border-bottom: 2px solid $border-color;
+    padding-bottom: 0;
+    width: 100%;
+    justify-content: center;
+    
+    @media (max-width: 1024px) {
+      justify-content: stretch;
+    }
+  }
+  
+  &__tab {
+    background: none;
+    border: none;
+    padding: clamp(0.75rem, 2vw, 1rem) clamp(0.5rem, 2vw, 1.5rem);
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    font-weight: 500;
+    color: $text-secondary;
+    background-color: $background-secondary;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.25rem, 1vw, 0.5rem);
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+    text-align: center;
+    
+    @media (min-width: 1025px) {
+      flex: 0 1 auto;
+      min-width: 140px;
+    }
+    
+    @media (max-width: 640px) {
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.6rem 0.3rem;
+    }
+    
+    &:hover {
+      background-color: $hover-color;
+      color: $text-primary;
+    }
+    
+    &--active {
+      background-color: $primary-color;
+      color: white;
+      border-bottom: 2px solid $primary-color;
+      margin-bottom: -2px;
+      
+      &:hover {
+        background-color: $primary-color;
+        color: white;
+      }
+    }
+  }
+  
+  &__label {
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    @media (max-width: 640px) {
+      font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+      white-space: normal;
+      line-height: 1.1;
+    }
+  }
+  
+  &__count {
+    font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+    opacity: 0.8;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: clamp(0.15rem, 0.5vw, 0.2rem) clamp(0.3rem, 1vw, 0.5rem);
+    border-radius: 12px;
+    white-space: nowrap;
+    
+    .tabs__tab:not(.tabs__tab--active) & {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    @media (max-width: 640px) {
+      font-size: 0.6rem;
+      padding: 0.1rem 0.3rem;
+    }
+  }
+}

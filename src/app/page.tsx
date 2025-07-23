@@ -1,95 +1,207 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import React, { useState, useCallback } from 'react';
+import FileInput from '@/components/FileInput';
+import Tabs from '@/components/Tabs';
+import UserList from '@/components/UserList';
+import Tutorial from '@/components/Tutorial';
+import { 
+  ProcessedUser, 
+  TabType 
+} from '@/types/instagram';
+import { 
+  validateFollowersData, 
+  validateFollowingData, 
+  processUsers, 
+  calculateMutuals, 
+  calculateNonFollowers, 
+  calculateNonFollowing 
+} from '@/utils/instagram';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [followersFile, setFollowersFile] = useState<File | null>(null);
+  const [followingFile, setFollowingFile] = useState<File | null>(null);
+  const [followersData, setFollowersData] = useState<ProcessedUser[]>([]);
+  const [followingData, setFollowingData] = useState<ProcessedUser[]>([]);
+  const [isDataValid, setIsDataValid] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState<TabType>('followers');
+  const [hiddenUsers, setHiddenUsers] = useState<Set<string>>(new Set());
+  const [isFollowersValid, setIsFollowersValid] = useState(true);
+  const [isFollowingValid, setIsFollowingValid] = useState(true);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  const validateAndProcessFiles = useCallback(async () => {
+    if (!followersFile || !followingFile) {
+      setIsDataValid(false);
+      return;
+    }
+
+    const errors: string[] = [];
+    let processedFollowers: ProcessedUser[] = [];
+    let processedFollowing: ProcessedUser[] = [];
+    let followersValid = true;
+    let followingValid = true;
+
+    try {
+      // Validate followers file
+      const followersText = await followersFile.text();
+      const followersJson = JSON.parse(followersText);
+      
+      if (!validateFollowersData(followersJson)) {
+        errors.push('Followers file does not match the expected format');
+        followersValid = false;
+      } else {
+        processedFollowers = processUsers(followersJson);
+      }
+    } catch {
+      errors.push('Invalid JSON format in followers file');
+      followersValid = false;
+    }
+
+    try {
+      // Validate following file
+      const followingText = await followingFile.text();
+      const followingJson = JSON.parse(followingText);
+      
+      if (!validateFollowingData(followingJson)) {
+        errors.push('Following file does not match the expected format');
+        followingValid = false;
+      } else {
+        processedFollowing = processUsers(followingJson.relationships_following);
+      }
+    } catch {
+      errors.push('Invalid JSON format in following file');
+      followingValid = false;
+    }
+
+    setIsFollowersValid(followersValid);
+    setIsFollowingValid(followingValid);
+    setValidationErrors(errors);
+    
+    if (errors.length === 0) {
+      setFollowersData(processedFollowers);
+      setFollowingData(processedFollowing);
+      setIsDataValid(true);
+      setHiddenUsers(new Set()); // Reset hidden users when new data is loaded
+    } else {
+      setIsDataValid(false);
+    }
+  }, [followersFile, followingFile]);
+
+  React.useEffect(() => {
+    validateAndProcessFiles();
+  }, [validateAndProcessFiles]);
+
+  const handleFollowersFileSelect = (file: File | null) => {
+    setFollowersFile(file);
+  };
+
+  const handleFollowingFileSelect = (file: File | null) => {
+    setFollowingFile(file);
+  };
+
+  const handleTabChange = (tab: TabType) => {
+    setActiveTab(tab);
+    setHiddenUsers(new Set()); // Reset hidden users when switching tabs
+  };
+
+  const handleHideUser = (username: string) => {
+    setHiddenUsers(prev => new Set([...prev, username]));
+  };
+
+  // Calculate the different lists
+  const mutuals = isDataValid ? calculateMutuals(followersData, followingData) : [];
+  const nonFollowers = isDataValid ? calculateNonFollowers(followersData, followingData) : [];
+  const nonFollowing = isDataValid ? calculateNonFollowing(followersData, followingData) : [];
+
+  const counts = {
+    followers: followersData.length,
+    following: followingData.length,
+    mutuals: mutuals.length,
+    nonFollowers: nonFollowers.length,
+    nonFollowing: nonFollowing.length,
+  };
+
+  const getCurrentList = (): ProcessedUser[] => {
+    switch (activeTab) {
+      case 'followers': return followersData;
+      case 'following': return followingData;
+      case 'mutuals': return mutuals;
+      case 'non-followers': return nonFollowers;
+      case 'non-following': return nonFollowing;
+      default: return [];
+    }
+  };
+
+  const getTabTitle = (): string => {
+    switch (activeTab) {
+      case 'followers': return 'Your Followers';
+      case 'following': return 'People You Follow';
+      case 'mutuals': return 'Mutual Followers';
+      case 'non-followers': return 'You Don\'t Follow Back';
+      case 'non-following': return 'People Who Don\'t Follow You Back';
+      default: return '';
+    }
+  };
+
+  return (
+    <>
+      <div className="main-container__title">
+        <h1>Instagram Unfollowers Analyzer</h1>
+      </div>
+      
+      <p className="main-container__subtitle">
+        Upload your Instagram data exports to analyze your followers and followings. 
+        Discover who doesn&apos;t follow you back, mutual connections, and more insights about your Instagram network.
+      </p>
+
+      <Tutorial />
+
+      <div className="file-inputs">
+        <div className="file-inputs__container">
+          <FileInput
+            label="Followers JSON"
+            placeholder="Upload your followers_1.json file"
+            onFileSelect={handleFollowersFileSelect}
+            isValid={isFollowersValid}
+          />
+          
+          <FileInput
+            label="Following JSON"
+            placeholder="Upload your following.json file"
+            onFileSelect={handleFollowingFileSelect}
+            isValid={isFollowingValid}
+          />
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      </div>
+
+      {validationErrors.length > 0 && (
+        <div className="validation-errors">
+          <h3>Validation Errors:</h3>
+          <ul>
+            {validationErrors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {isDataValid && (
+        <>
+          <Tabs
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+            counts={counts}
           />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+          
+          <UserList
+            users={getCurrentList()}
+            hiddenUsers={hiddenUsers}
+            onHideUser={handleHideUser}
+            title={getTabTitle()}
           />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        </>
+      )}
+    </>
   );
 }

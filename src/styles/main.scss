@@ -1,0 +1,10 @@
+// Import base styles
+@use './variables';
+@use './reset';
+
+// Import component styles
+@use './maincontainer';
+@use './fileinput';
+@use './tabs';
+@use './userlist';
+@use './tutorial';
