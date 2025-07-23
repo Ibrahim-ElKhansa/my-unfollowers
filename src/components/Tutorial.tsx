@@ -6,38 +6,43 @@ const Tutorial: React.FC = () => {
   const steps = [
     {
       step: 1,
-      title: "Open Instagram Settings",
-      description: "Go to Instagram and click on 'More' with the three horizontal lines icon, then click on 'Settings'."
+      title: "Instagram Settings",
+      description: "Go to your Instagram profile → ☰ (three lines) → Settings"
     },
     {
       step: 2,
-      title: "Navigate to Accounts Center",
-      description: "Click on the button that says 'Accounts Center'."
+      title: "Accounts Center",
+      description: "Click 'Accounts Center' (first button you see)"
     },
     {
       step: 3,
-      title: "Access Your Information",
-      description: "Click on 'Your information and permissions' then click on 'Download your information'."
+      title: "Download Data",
+      description: "Your information and permissions → Download your information"
     },
     {
       step: 4,
-      title: "Download or Transfer Information",
-      description: "Click on the button that says 'Download or transfer information'. If you have multiple accounts, choose which account information you want to download (make sure to only choose one) then click on 'Next'."
+      title: "Select Account",
+      description: "Download or transfer information → Choose account → Next"
     },
     {
       step: 5,
-      title: "Select Data Types",
-      description: "Choose to download 'Some of your information' and then scroll down to the 'Connections' section and click on the check box for 'Followers and following'. Then click 'Next'."
+      title: "Choose Data",
+      description: "Some of your information → Connections → ✓ Followers and following → Next"
     },
     {
       step: 6,
-      title: "Choose Format & Date Range",
-      description: "Here you want to choose the Date Range to 'All Time' and then change the format to JSON (this is a very important step otherwise the app won't work). When done click on 'Create Files'."
+      title: "Download Method",
+      description: "Click 'Download to device'"
     },
     {
       step: 7,
-      title: "Download Your Files",
-      description: "Wait a bit and then refresh the page or leave and come back in. You will now see your pending request is now downloadable and you can extract the two JSON files 'Followers_1.json' and 'Following.json' from the zipped folder."
+      title: "Format Settings",
+      description: "Date Range: All Time → Format: JSON → Create Files"
+    },
+    {
+      step: 8,
+      title: "Download Files",
+      description: "Wait, refresh page, download ZIP and extract Followers_1.json & Following.json"
     }
   ];
 
@@ -60,13 +65,9 @@ const Tutorial: React.FC = () => {
       {isExpanded && (
         <div className="tutorial__content">
           <div className="tutorial__intro">
-            <div className="tutorial__tip">
-              <strong>💡 Important Tip:</strong> You can use this app on mobile, but handling files is easier on desktop, so we advise using a laptop if possible.
-            </div>
             <p>
-              To analyze your Instagram followers and following, you&apos;ll need to download your data from Instagram. 
-              This is completely safe and uses Instagram&apos;s official data export feature. Your data is completely 
-              private and secure - everything is processed locally in your browser.
+              Download your Instagram data using their official export feature. 
+              Everything is processed locally in your browser - completely private and secure.
             </p>
           </div>
           
@@ -87,11 +88,9 @@ const Tutorial: React.FC = () => {
             <div className="tutorial__note-content">
               <strong>Privacy & Security:</strong>
               <ul>
-                <li>Your data is processed locally in your browser - nothing is uploaded to our servers</li>
-                <li>Your personal information never leaves your device</li>
-                <li>This tool is completely client-side and respects your privacy</li>
-                <li>You&apos;ll receive an email when your data is ready</li>
-                <li>Make sure to upload both Followers_1.json AND Following.json files</li>
+                <li>All processing happens in your browser</li>
+                <li>Your data never leaves your device</li>
+                <li>Upload both Followers_1.json AND Following.json files</li>
               </ul>
             </div>
           </div>
