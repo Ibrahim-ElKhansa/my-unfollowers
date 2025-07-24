@@ -239,6 +239,74 @@
       }
     }
   }
+
+  &__references {
+    background-color: rgba(99, 102, 241, 0.1);
+    border-top: 1px solid $border-color;
+    border-left: 3px solid $primary-color;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    margin-top: clamp(0.75rem, 2vw, 1rem);
+    
+    &-content {
+      strong {
+        color: $text-primary;
+        font-weight: 600;
+        display: block;
+        margin-bottom: clamp(0.75rem, 2vw, 1rem);
+        font-size: clamp(0.9rem, 2.2vw, 1rem);
+      }
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1.5vw, 0.75rem);
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(0.4rem, 1vw, 0.5rem);
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
+    background-color: $background-card;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    color: $text-primary;
+    text-decoration: none;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    &--github {
+      &:hover {
+        border-color: #333;
+        background-color: #333;
+        color: white;
+      }
+    }
+    
+    &--instagram {
+      &:hover {
+        border-color: #E4405F;
+        background-color: #E4405F;
+        color: white;
+      }
+    }
+    
+    &--portfolio {
+      &:hover {
+        border-color: $primary-color;
+        background-color: $primary-color;
+        color: white;
+      }
+    }
+  }
 }
 
 @keyframes slideDown {

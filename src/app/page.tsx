@@ -26,7 +26,13 @@ export default function Home() {
   const [isDataValid, setIsDataValid] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<TabType>('followers');
-  const [hiddenUsers, setHiddenUsers] = useState<Set<string>>(new Set());
+  const [hiddenUsersByTab, setHiddenUsersByTab] = useState<Record<TabType, Set<string>>>({
+    followers: new Set(),
+    following: new Set(),
+    mutuals: new Set(),
+    'non-followers': new Set(),
+    'non-following': new Set()
+  });
   const [isFollowersValid, setIsFollowersValid] = useState(true);
   const [isFollowingValid, setIsFollowingValid] = useState(true);
   const [autoDeleteOnClick, setAutoDeleteOnClick] = useState(false);
@@ -44,7 +50,6 @@ export default function Home() {
     let followingValid = true;
 
     try {
-      // Validate followers file
       const followersText = await followersFile.text();
       const followersJson = JSON.parse(followersText);
       
@@ -60,7 +65,6 @@ export default function Home() {
     }
 
     try {
-      // Validate following file
       const followingText = await followingFile.text();
       const followingJson = JSON.parse(followingText);
       
@@ -83,7 +87,13 @@ export default function Home() {
       setFollowersData(processedFollowers);
       setFollowingData(processedFollowing);
       setIsDataValid(true);
-      setHiddenUsers(new Set()); // Reset hidden users when new data is loaded
+      setHiddenUsersByTab({
+        'followers': new Set(),
+        'following': new Set(),
+        'mutuals': new Set(),
+        'non-followers': new Set(),
+        'non-following': new Set(),
+      });
     } else {
       setIsDataValid(false);
     }
@@ -103,11 +113,13 @@ export default function Home() {
 
   const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
-    setHiddenUsers(new Set()); // Reset hidden users when switching tabs
   };
 
   const handleHideUser = (username: string) => {
-    setHiddenUsers(prev => new Set([...prev, username]));
+    setHiddenUsersByTab(prev => ({
+      ...prev,
+      [activeTab]: new Set([...prev[activeTab], username])
+    }));
   };
 
   const handleLinkClick = (username: string) => {
@@ -116,7 +128,6 @@ export default function Home() {
     }
   };
 
-  // Calculate the different lists
   const mutuals = isDataValid ? calculateMutuals(followersData, followingData) : [];
   const nonFollowers = isDataValid ? calculateNonFollowers(followersData, followingData) : [];
   const nonFollowing = isDataValid ? calculateNonFollowing(followersData, followingData) : [];
@@ -224,7 +235,13 @@ export default function Home() {
                     setIsDataValid(false);
                     setFollowersFile(null);
                     setFollowingFile(null);
-                    setHiddenUsers(new Set());
+                    setHiddenUsersByTab({
+                      followers: new Set(),
+                      following: new Set(),
+                      mutuals: new Set(),
+                      'non-followers': new Set(),
+                      'non-following': new Set()
+                    });
                     setValidationErrors([]);
                   }}
                 >
@@ -242,7 +259,7 @@ export default function Home() {
           
           <UserList
             users={getCurrentList()}
-            hiddenUsers={hiddenUsers}
+            hiddenUsers={hiddenUsersByTab[activeTab]}
             onHideUser={handleHideUser}
             onLinkClick={handleLinkClick}
             title={getTabTitle()}

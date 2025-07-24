@@ -1,64 +1,117 @@
-# Instagram Unfollowers Analyzer
+# 📱 Instagram Unfollowers Analyzer
 
-A simple and elegant web application to analyze your Instagram followers and followings data. Upload your Instagram data exports to discover insights about your social network.
+**Live Demo:** [https://my-unfollowers.vercel.app/](https://my-unfollowers.vercel.app/)
 
-## Features
+A privacy-focused web application that helps you analyze your Instagram follower relationships using your official Instagram data export. Discover who doesn't follow you back, find mutual connections, and gain insights into your Instagram network - all processed locally in your browser for maximum privacy.
 
-- 📊 Compare followers vs following
-- 🔍 Find people who don't follow you back
-- 👥 Discover mutual connections
-- 📈 Get detailed statistics about your Instagram network
-- 🎨 Beautiful dark theme with modern UI
-- 📱 Responsive design
-- 🔒 Complete privacy - all data processing happens locally in your browser
+![Instagram Unfollowers Analyzer](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)
+![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass)
 
-## How to Get Your Instagram Data
+## 🌟 Features
 
-1. Go to Instagram and click on "More" with the three horizontal lines icon, then click on "Settings"
-2. Click on the button that says "Accounts Center"
-3. Click on "Your information and permissions" then click on "Download your information"
-4. Click on "Download or transfer information". If you have multiple accounts, choose which account you want to download
-5. Choose "Some of your information" and scroll to "Connections" section, check "Followers and following"
-6. Set Date Range to "All Time" and format to "JSON" (very important!)
-7. Click "Create Files" and wait for the download to be ready
-8. Extract the ZIP file and find:
-   - `Followers_1.json` (your followers)
-   - `Following.json` (people you follow)
+### 📊 **Data Analysis**
+- **Followers Analysis**: View all your followers with timestamps
+- **Following Analysis**: See everyone you follow
+- **Mutual Followers**: Find people who follow you back
+- **Non-Followers**: Discover who you follow but doesn't follow you back
+- **Non-Following**: See who follows you but you don't follow back
 
-## Usage
+### 🎯 **Smart Features**
+- **Auto-Hide Functionality**: Automatically hide users from lists after clicking their profile links
+- **Interactive Tutorial**: Step-by-step guide with screenshots for downloading Instagram data
+- **Real-time Validation**: Instant feedback on uploaded JSON files
+- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
 
-1. Upload your `Followers_1.json` file using the "Followers JSON" input
-2. Upload your `Following.json` file using the "Following JSON" input
-3. The app will automatically analyze the data and show you:
-   - Total followers count
-   - Total following count
-   - People you follow who don't follow you back
-   - People who follow you but you don't follow back
-   - Mutual followers
+### 🔒 **Privacy & Security**
+- **100% Client-Side Processing**: Your data never leaves your device
+- **No Server Upload**: All analysis happens in your browser
+- **Official Instagram Data**: Uses Instagram's official data export feature
+- **Complete Privacy**: Full transparency with secure local processing
 
-## Privacy & Security
+### 🎨 **User Experience**
+- **Modern UI**: Clean, intuitive interface with smooth animations
+- **Custom Scrollbars**: Themed scrollbars matching the color scheme
+- **Drag & Drop**: Easy file upload with drag and drop support
+- **Tab Navigation**: Organized data viewing with tab-based interface
+- **Hide/Show Users**: Remove users from lists with one click
 
-- ✅ **100% Client-Side**: All data processing happens in your browser
-- ✅ **No Data Upload**: Your files never leave your device
-- ✅ **No Storage**: No data is stored on any servers
-- ✅ **Open Source**: You can verify the code yourself
+##  How to Get Your Instagram Data
 
-## Tech Stack
+The app includes a detailed tutorial, but here's a quick overview:
 
-- **Framework**: Next.js 15
-- **Language**: TypeScript
-- **Styling**: SCSS with BEM methodology
-- **Analytics**: Vercel Analytics
-- **UI**: Custom responsive components with modern design
+1. **Instagram Settings** → **Accounts Center**
+2. **Your information and permissions** → **Download your information**
+3. Select **"Some of your information"** → Check **"Followers and following"**
+4. Choose **"Download to device"** → **All time** → **JSON format**
+5. **Create Files** → Wait for processing → Download ZIP
+6. Extract `followers_1.json` and `following.json` from the ZIP file
 
-## Color Scheme
+## 🛠️ Built With
 
-The app uses a modern dark theme with:
-- **Primary**: Indigo (#6366f1)
-- **Accent**: Cyan (#22d3ee)
-- **Background**: Dark blue gradient
-- **Text**: White and gray variants
+- **[Next.js 15](https://nextjs.org/)** - React framework for production
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
+- **[React 18](https://reactjs.org/)** - UI library
+- **[SCSS](https://sass-lang.com/)** - CSS preprocessor with BEM methodology
+- **[Vercel](https://vercel.com/)** - Deployment platform
 
-## License
+## 📁 Project Structure
 
-This project is for personal use. Please respect Instagram's terms of service when using your data.
+```
+src/
+├── app/                 # Next.js app directory
+│   ├── page.tsx        # Main page component
+│   └── layout.tsx      # Root layout
+├── components/         # React components
+│   ├── FileInput.tsx   # File upload component
+│   ├── Tabs.tsx        # Tab navigation
+│   ├── Tutorial.tsx    # Interactive tutorial
+│   └── UserList.tsx    # User list display
+├── styles/             # SCSS stylesheets
+│   ├── main.scss       # Main stylesheet
+│   ├── variables.scss  # SCSS variables
+│   ├── tutorial.scss   # Tutorial styles
+│   ├── userlist.scss   # User list styles
+│   ├── settings.scss   # Settings panel styles
+│   └── ...
+├── types/              # TypeScript type definitions
+│   └── instagram.ts    # Instagram data types
+└── utils/              # Utility functions
+    └── instagram.ts    # Data processing utilities
+```
+
+## 🔧 Key Features Implementation
+
+### Data Processing
+- **JSON Validation**: Robust validation for Instagram data format
+- **Type Safety**: Full TypeScript implementation with custom interfaces
+- **Efficient Processing**: Optimized algorithms for large datasets
+
+### User Interface
+- **Responsive Design**: Mobile-first approach with CSS clamp() functions
+- **Accessibility**: ARIA labels, keyboard navigation, and screen reader support
+- **Performance**: Optimized with Next.js Image component and lazy loading
+
+### Privacy Features
+- **Local Processing**: No data transmission to external servers
+- **Secure File Handling**: Client-side file reading and processing
+- **Data Control**: Users maintain full control over their data
+
+## 🔗 Connect with the Developer
+
+- **🌐 Live Demo**: [https://my-unfollowers.vercel.app/](https://my-unfollowers.vercel.app/)
+- **📱 Follow on Instagram**: [@noprobbxb](https://www.instagram.com/noprobbxb/)
+- **🚀 More Projects**: [ibrahimelkhansa.com](https://www.ibrahimelkhansa.com/)
+
+## 👨‍💻 Developer
+
+Created by **Ibrahim El Khansa**
+
+**Connect with me:**
+- 🌐 Portfolio: [ibrahimelkhansa.com](https://www.ibrahimelkhansa.com/)
+- 📱 Instagram: [@noprobbxb](https://www.instagram.com/noprobbxb/)
+
+---
+
+� **Built with modern web technologies for optimal performance and user experience.**

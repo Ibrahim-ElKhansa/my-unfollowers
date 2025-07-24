@@ -95,6 +95,30 @@ const Tutorial: React.FC = () => {
               </ul>
             </div>
           </div>
+
+          <div className="tutorial__references">
+            <div className="tutorial__references-content">
+              <strong>📋 Connect with the Developer:</strong>
+              <div className="tutorial__links">
+                <a 
+                  href="https://www.instagram.com/noprobbxb/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tutorial__link tutorial__link--instagram"
+                >
+                  📱 Follow me on Instagram @noprobbxb
+                </a>
+                <a 
+                  href="https://www.ibrahimelkhansa.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tutorial__link tutorial__link--portfolio"
+                >
+                  🚀 Check out my other projects
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
