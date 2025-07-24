@@ -1,45 +1,35 @@
-// Color scheme variables - Using SCSS variables directly
-// Primary colors
 $primary-color: #6366f1;
 $primary-dark: #4f46e5;
 $primary-light: #818cf8;
 
-// Background colors
 $background-color: #0f0f23;
 $background-secondary: #1a1a3e;
 $background-card: #252547;
 
-// Text colors
 $text-primary: #ffffff;
 $text-secondary: #a1a1aa;
 $text-muted: #71717a;
 
-// Accent colors
 $accent-color: #22d3ee;
 $success-color: #10b981;
 $warning-color: #f59e0b;
 $error-color: #ef4444;
 
-// Borders
 $border-color: #374151;
 $border-light: #4b5563;
 
-// Spacing
 $spacing-xs: 0.5rem;
 $spacing-sm: 1rem;
 $spacing-md: 1.5rem;
 $spacing-lg: 2rem;
 $spacing-xl: 3rem;
 
-// Border radius
 $radius-sm: 0.375rem;
 $radius-md: 0.5rem;
 $radius-lg: 0.75rem;
 
-// Shadows
 $shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 $shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 $shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-// Additional variables
 $hover-color: rgba(99, 102, 241, 0.1);

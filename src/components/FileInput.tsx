@@ -47,7 +47,6 @@ const FileInput: FC<FileInputProps> = ({
       setSelectedFile(file);
       onFileSelect(file);
       
-      // Update the input element
       if (fileInputRef.current) {
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);

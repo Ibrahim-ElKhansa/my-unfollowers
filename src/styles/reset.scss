@@ -1,6 +1,5 @@
 @use './variables' as *;
 
-// Reset and base styles
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,7 +19,6 @@ body {
   overflow-x: hidden;
 }
 
-// Typography
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
@@ -44,7 +42,6 @@ p {
   color: $text-secondary;
 }
 
-// Button reset
 button {
   background: none;
   border: none;
@@ -52,7 +49,6 @@ button {
   font-family: inherit;
 }
 
-// Input reset
 input {
   background: none;
   border: none;
@@ -60,13 +56,11 @@ input {
   outline: none;
 }
 
-// Link reset
 a {
   color: inherit;
   text-decoration: none;
 }
 
-// Custom scrollbar styles
 * {
   &::-webkit-scrollbar {
     width: 8px;

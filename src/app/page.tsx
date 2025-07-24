@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
+import { track } from '@vercel/analytics';
 import FileInput from '@/components/FileInput';
 import Tabs from '@/components/Tabs';
 import UserList from '@/components/UserList';
@@ -95,6 +96,10 @@ export default function Home() {
         'non-followers': new Set(),
         'non-following': new Set(),
       });
+
+      track('data_upload_success', {
+        timestamp: new Date().toISOString()
+      });
     } else {
       setIsDataValid(false);
     }
@@ -124,6 +129,10 @@ export default function Home() {
   };
 
   const handleLinkClick = (username: string) => {
+    track('profile_click', {
+      timestamp: new Date().toISOString()
+    });
+
     if (autoDeleteOnClick) {
       handleHideUser(username);
     }

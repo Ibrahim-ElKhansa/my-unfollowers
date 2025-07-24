@@ -1,6 +1,5 @@
 @use './variables' as *;
 
-// Main container component using BEM methodology
 .main-container {
   width: 100vw;
   min-height: 100vh;
@@ -13,7 +12,6 @@
   overflow-x: hidden;
   overflow-y: auto;
   
-  // Custom scrollbar styling
   &::-webkit-scrollbar {
     width: 8px;
   }
