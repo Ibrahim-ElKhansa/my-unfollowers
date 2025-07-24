@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 const Tutorial: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -6,43 +7,33 @@ const Tutorial: React.FC = () => {
   const steps = [
     {
       step: 1,
-      title: "Instagram Settings",
-      description: "Go to your Instagram profile → ☰ (three lines) → Settings"
+      title: "Access Instagram Settings",
+      description: "Go to Instagram Settings → Accounts Center",
+      image: "/tutorial-images/step1.png"
     },
     {
       step: 2,
-      title: "Accounts Center",
-      description: "Click 'Accounts Center' (first button you see)"
+      title: "Navigate to Information & Permissions",
+      description: "Click 'Your information and permissions' → 'Download your information'",
+      image: "/tutorial-images/step2.png"
     },
     {
       step: 3,
-      title: "Download Data",
-      description: "Your information and permissions → Download your information"
+      title: "Choose Information Type",
+      description: "Select 'Some of your information' → Check 'Followers and following' → Next",
+      image: "/tutorial-images/step3.png"
     },
     {
       step: 4,
-      title: "Select Account",
-      description: "Download or transfer information → Choose account → Next"
+      title: "Configure Download Settings",
+      description: "Choose 'Download to device' → Date Range: All time → Format: JSON → Create Files",
+      image: "/tutorial-images/step4.png"
     },
     {
       step: 5,
-      title: "Choose Data",
-      description: "Some of your information → Connections → ✓ Followers and following → Next"
-    },
-    {
-      step: 6,
-      title: "Download Method",
-      description: "Click 'Download to device'"
-    },
-    {
-      step: 7,
-      title: "Format Settings",
-      description: "Date Range: All Time → Format: JSON → Create Files"
-    },
-    {
-      step: 8,
-      title: "Download Files",
-      description: "Wait, refresh page, download ZIP and extract Followers_1.json & Following.json"
+      title: "Download Your Files",
+      description: "Wait for processing → Download ZIP → Extract 'followers_1.json' and 'following.json'",
+      image: "/tutorial-images/step5.png"
     }
   ];
 
@@ -78,6 +69,16 @@ const Tutorial: React.FC = () => {
                 <div className="tutorial__step-content">
                   <h4 className="tutorial__step-title">{step.title}</h4>
                   <p className="tutorial__step-description">{step.description}</p>
+                  {step.image && (
+                    <div className="tutorial__step-image-container">
+                      <Image
+                        src={step.image}
+                        alt={`Step ${step.step}: ${step.title}`}
+                        fill
+                        className="tutorial__step-image"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

@@ -29,6 +29,7 @@ export default function Home() {
   const [hiddenUsers, setHiddenUsers] = useState<Set<string>>(new Set());
   const [isFollowersValid, setIsFollowersValid] = useState(true);
   const [isFollowingValid, setIsFollowingValid] = useState(true);
+  const [autoDeleteOnClick, setAutoDeleteOnClick] = useState(false);
 
   const validateAndProcessFiles = useCallback(async () => {
     if (!followersFile || !followingFile) {
@@ -109,6 +110,12 @@ export default function Home() {
     setHiddenUsers(prev => new Set([...prev, username]));
   };
 
+  const handleLinkClick = (username: string) => {
+    if (autoDeleteOnClick) {
+      handleHideUser(username);
+    }
+  };
+
   // Calculate the different lists
   const mutuals = isDataValid ? calculateMutuals(followersData, followingData) : [];
   const nonFollowers = isDataValid ? calculateNonFollowers(followersData, followingData) : [];
@@ -157,23 +164,25 @@ export default function Home() {
 
       <Tutorial />
 
-      <div className="file-inputs">
-        <div className="file-inputs__container">
-          <FileInput
-            label="Followers JSON"
-            placeholder="Upload your followers_1.json file"
-            onFileSelect={handleFollowersFileSelect}
-            isValid={isFollowersValid}
-          />
-          
-          <FileInput
-            label="Following JSON"
-            placeholder="Upload your following.json file"
-            onFileSelect={handleFollowingFileSelect}
-            isValid={isFollowingValid}
-          />
+      {!isDataValid && (
+        <div className="file-inputs">
+          <div className="file-inputs__container">
+            <FileInput
+              label="Followers JSON"
+              placeholder="Upload your followers_1.json file"
+              onFileSelect={handleFollowersFileSelect}
+              isValid={isFollowersValid}
+            />
+            
+            <FileInput
+              label="Following JSON"
+              placeholder="Upload your following.json file"
+              onFileSelect={handleFollowingFileSelect}
+              isValid={isFollowingValid}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       {validationErrors.length > 0 && (
         <div className="validation-errors">
@@ -188,6 +197,43 @@ export default function Home() {
 
       {isDataValid && (
         <>
+          <div className="settings">
+            <div className="settings__container">
+              <h3 className="settings__title">⚙️ Settings</h3>
+              <div className="settings__option">
+                <label className="settings__checkbox">
+                  <input 
+                    type="checkbox" 
+                    checked={autoDeleteOnClick}
+                    onChange={(e) => setAutoDeleteOnClick(e.target.checked)}
+                  />
+                  <span className="settings__checkbox-custom"></span>
+                  <span className="settings__label">Auto-hide users after clicking their profile link</span>
+                </label>
+                <p className="settings__description">
+                  When enabled, users will be automatically hidden from the list after you click on their Instagram profile link.
+                </p>
+              </div>
+              <div className="settings__data-info">
+                <p className="settings__data-text">
+                  📊 Data loaded successfully! Found {counts.followers} followers and {counts.following} following.
+                </p>
+                <button 
+                  className="settings__reload-btn"
+                  onClick={() => {
+                    setIsDataValid(false);
+                    setFollowersFile(null);
+                    setFollowingFile(null);
+                    setHiddenUsers(new Set());
+                    setValidationErrors([]);
+                  }}
+                >
+                  📁 Load New Files
+                </button>
+              </div>
+            </div>
+          </div>
+
           <Tabs
             activeTab={activeTab}
             onTabChange={handleTabChange}
@@ -198,6 +244,7 @@ export default function Home() {
             users={getCurrentList()}
             hiddenUsers={hiddenUsers}
             onHideUser={handleHideUser}
+            onLinkClick={handleLinkClick}
             title={getTabTitle()}
           />
         </>

@@ -5,10 +5,11 @@ interface UserListProps {
   users: ProcessedUser[];
   hiddenUsers: Set<string>;
   onHideUser: (username: string) => void;
+  onLinkClick?: (username: string) => void;
   title: string;
 }
 
-const UserList: React.FC<UserListProps> = ({ users, hiddenUsers, onHideUser, title }) => {
+const UserList: React.FC<UserListProps> = ({ users, hiddenUsers, onHideUser, onLinkClick, title }) => {
   const visibleUsers = users.filter(user => !hiddenUsers.has(user.username));
 
   const formatDate = (timestamp: number) => {
@@ -36,6 +37,7 @@ const UserList: React.FC<UserListProps> = ({ users, hiddenUsers, onHideUser, tit
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="user-list__username"
+                  onClick={() => onLinkClick?.(user.username)}
                 >
                   @{user.username}
                 </a>

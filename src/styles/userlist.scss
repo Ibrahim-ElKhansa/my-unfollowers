@@ -60,6 +60,25 @@
     border-radius: 8px;
     background-color: $background-color;
     
+    // Custom scrollbar for user list
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: $background-color;
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $primary-color;
+      border-radius: 3px;
+      
+      &:hover {
+        background: $primary-light;
+      }
+    }
+    
     @media (max-width: 768px) {
       max-height: 50vh;
     }
@@ -70,16 +89,18 @@
     justify-content: space-between;
     align-items: center;
     padding: clamp(0.6rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
-    background-color: white;
+    background-color: $background-card;
     border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid $border-color;
     transition: all 0.2s ease;
     gap: 1rem;
     
     &:hover {
-      background-color: $hover-color;
+      background-color: $primary-color;
+      color: $background-card;
       transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      border-color: $primary-light;
     }
     
     @media (max-width: 480px) {
@@ -97,15 +118,21 @@
   }
   
   &__username {
+    width: fit-content;
     font-weight: 500;
     color: $primary-color;
     text-decoration: none;
     font-size: clamp(0.85rem, 2vw, 0.95rem);
     line-height: 1.2;
     word-break: break-word;
+    transition: color 0.2s ease;
     
     &:hover {
       text-decoration: underline;
+    }
+    
+    .user-list__item:hover & {
+      color: $background-card;
     }
     
     @media (max-width: 480px) {
@@ -117,6 +144,11 @@
     font-size: clamp(0.65rem, 1.5vw, 0.75rem);
     color: $text-secondary;
     line-height: 1.2;
+    transition: color 0.2s ease;
+    
+    .user-list__item:hover & {
+      color: rgba(255, 255, 255, 0.8);
+    }
   }
   
   &__hide-btn {
@@ -139,6 +171,15 @@
       background-color: rgba(220, 53, 69, 0.1);
       color: #dc3545;
       transform: scale(1.1);
+    }
+    
+    .user-list__item:hover & {
+      color: rgba(255, 255, 255, 0.9);
+      
+      &:hover {
+        background-color: rgba(220, 53, 69, 0.2);
+        color: #ff6b6b;
+      }
     }
   }
 }

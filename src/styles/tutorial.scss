@@ -115,6 +115,7 @@
   
   &__step {
     display: flex;
+    flex-direction: column;
     gap: clamp(0.75rem, 2vw, 1rem);
     padding: clamp(0.75rem, 2vw, 1rem);
     margin-bottom: clamp(0.4rem, 1vw, 0.5rem);
@@ -146,12 +147,14 @@
     font-size: clamp(0.8rem, 2vw, 0.9rem);
     flex-shrink: 0;
     user-select: none;
+    align-self: flex-start;
   }
   
   &__step-content {
     flex: 1;
     min-width: 0;
     user-select: none;
+    width: 100%;
   }
   
   &__step-title {
@@ -165,8 +168,28 @@
   &__step-description {
     font-size: clamp(0.8rem, 2vw, 0.9rem);
     color: $text-secondary;
-    margin: 0;
+    margin: 0 0 clamp(0.5rem, 1vw, 0.75rem) 0;
     line-height: 1.5;
+  }
+
+  &__step-image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    margin-top: clamp(0.5rem, 1vw, 0.75rem);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid $border-color;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &__step-image {
+    object-fit: cover;
+    transition: transform 0.2s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
   }
   
   &__note {
@@ -175,7 +198,7 @@
     padding: clamp(1rem, 3vw, 1.5rem);
     background-color: rgba(16, 185, 129, 0.1);
     border-top: 1px solid $border-color;
-    border-left: 3px solid var(--color-success);
+    border-left: 3px solid $success-color;
     
     @media (max-width: 640px) {
       flex-direction: column;

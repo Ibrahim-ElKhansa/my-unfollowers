@@ -10,7 +10,7 @@
   
   &__label {
     font-weight: 500;
-    color: var(--color-text-primary);
+    color: $text-primary;
     font-size: clamp(0.8rem, 2vw, 0.875rem);
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -22,30 +22,30 @@
     align-items: center;
     justify-content: center;
     min-height: clamp(100px, 15vw, 120px);
-    border: 2px dashed var(--color-border);
-    border-radius: var(--radius-lg);
+    border: 2px dashed $border-color;
+    border-radius: $radius-lg;
     background-color: transparent;
     transition: all 0.3s ease;
     cursor: pointer;
     
     &:hover {
-      border-color: var(--color-primary);
+      border-color: $primary-color;
       background-color: rgba(99, 102, 241, 0.05);
     }
     
     &--dragover {
-      border-color: var(--color-accent);
+      border-color: $accent-color;
       background-color: rgba(34, 211, 238, 0.05);
     }
     
     &--has-file {
       cursor: pointer;
       border-style: solid;
-      border-color: var(--color-success);
+      border-color: $success-color;
       background-color: rgba(16, 185, 129, 0.1);
       
       &:hover {
-        border-color: var(--color-success);
+        border-color: $success-color;
         background-color: rgba(16, 185, 129, 0.15);
       }
     }
@@ -53,11 +53,11 @@
     &--has-error {
       cursor: pointer;
       border-style: solid;
-      border-color: var(--color-error);
+      border-color: $error-color;
       background-color: rgba(239, 68, 68, 0.1);
       
       &:hover {
-        border-color: var(--color-error);
+        border-color: $error-color;
         background-color: rgba(239, 68, 68, 0.15);
       }
     }
@@ -75,10 +75,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-sm);
-    color: var(--color-text-muted);
+    gap: $spacing-sm;
+    color: $text-muted;
     text-align: center;
-    padding: var(--spacing-md);
+    padding: $spacing-md;
     pointer-events: none;
   }
   
@@ -93,12 +93,12 @@
     line-height: 1.4;
     
     &--primary {
-      color: var(--color-text-secondary);
+      color: $text-secondary;
       font-weight: 500;
     }
     
     &--secondary {
-      color: var(--color-text-muted);
+      color: $text-muted;
       font-size: 0.75rem;
     }
   }
@@ -106,12 +106,12 @@
   &__filename {
     display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-sm);
+    gap: $spacing-xs;
+    padding: $spacing-sm;
     background-color: transparent;
-    border-radius: var(--radius-md);
+    border-radius: $radius-md;
     font-size: 0.875rem;
-    color: var(--color-text-primary);
+    color: $text-primary;
     width: 100%;
     
     &-icon {
@@ -120,11 +120,11 @@
       flex-shrink: 0;
       
       &--success {
-        color: var(--color-success);
+        color: $success-color;
       }
       
       &--error {
-        color: var(--color-error);
+        color: $error-color;
       }
     }
     
