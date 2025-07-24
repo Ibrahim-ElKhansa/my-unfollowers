@@ -5,6 +5,7 @@ import FileInput from '@/components/FileInput';
 import Tabs from '@/components/Tabs';
 import UserList from '@/components/UserList';
 import Tutorial from '@/components/Tutorial';
+import Watermark from '@/components/Watermark';
 import { 
   ProcessedUser, 
   TabType 
@@ -266,6 +267,8 @@ export default function Home() {
           />
         </>
       )}
+      
+      <Watermark />
     </>
   );
 }
