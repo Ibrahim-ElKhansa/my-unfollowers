@@ -1,6 +1,6 @@
 # 📱 Instagram Unfollowers Analyzer
 
-**Live Demo:** [https://my-unfollowers.vercel.app/](https://my-unfollowers.vercel.app/)
+**Live Demo:** [https://myunfollowers.app/](https://myunfollowers.app/)
 
 A privacy-focused web application that helps you analyze your Instagram follower relationships using your official Instagram data export. Discover who doesn't follow you back, find mutual connections, and gain insights into your Instagram network - all processed locally in your browser for maximum privacy.
 
@@ -100,7 +100,7 @@ src/
 
 ## 🔗 Connect with the Developer
 
-- **🌐 Live Demo**: [https://my-unfollowers.vercel.app/](https://my-unfollowers.vercel.app/)
+- **🌐 Live Demo**: [https://myunfollowers.app/](https://myunfollowers.app/)
 - **📱 Follow on Instagram**: [@noprobbxb](https://www.instagram.com/noprobbxb/)
 - **🚀 More Projects**: [ibrahimelkhansa.com](https://www.ibrahimelkhansa.com/)
 
