@@ -1,0 +1,19 @@
+{
+  "name": "Instagram Unfollowers Analyzer",
+  "short_name": "IG Unfollowers",
+  "description": "Analyze your Instagram followers and followings to see who doesn't follow you back",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f23",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["social", "utilities", "productivity"],
+  "lang": "en",
+  "orientation": "portrait-primary"
+}

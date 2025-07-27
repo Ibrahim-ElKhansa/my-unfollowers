@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 import "../styles/main.scss";
 
 const geistSans = Geist({
@@ -16,6 +16,30 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Instagram Unfollowers Analyzer",
   description: "Analyze your Instagram followers and followings to see who doesn't follow you back",
+  keywords: "instagram, unfollowers, followers, social media, analyzer, privacy, local processing",
+  authors: [{ name: "Ibrahim El-Khansa", url: "https://ibrahimelkhansa.com" }],
+  creator: "Ibrahim El Khansa",
+  publisher: "Ibrahim El Khansa",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://www.myunfollowers.app/",
+    title: "Instagram Unfollowers Analyzer",
+    description: "Analyze your Instagram followers and followings to see who doesn't follow you back - completely private and secure",
+    siteName: "Instagram Unfollowers Analyzer",
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -26,11 +50,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className="main-container">
-          <div className="main-container__content">
-            {children}
-          </div>
-        </div>
+        <main className="main-container">
+          <section className="main-container__content">{children}</section>
+        </main>
         <Analytics />
       </body>
     </html>

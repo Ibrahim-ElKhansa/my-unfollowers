@@ -23,16 +23,23 @@ const Tabs: FC<TabsProps> = ({ activeTab, onTabChange, counts }) => {
   ];
 
   return (
-    <div className="tabs">
+    <nav className="tabs" role="tablist" aria-label="Data categories">
       <div className="tabs__container">
         {tabs.map((tab) => (
-          <button key={tab.id} className={`tabs__tab ${activeTab === tab.id ? "tabs__tab--active" : ""}`} onClick={() => onTabChange(tab.id)}>
+          <button 
+            key={tab.id} 
+            className={`tabs__tab ${activeTab === tab.id ? "tabs__tab--active" : ""}`} 
+            onClick={() => onTabChange(tab.id)}
+            role="tab"
+            aria-selected={activeTab === tab.id}
+            aria-controls={`tabpanel-${tab.id}`}
+          >
             <span className="tabs__label">{tab.label}</span>
             <span className="tabs__count">({tab.count})</span>
           </button>
         ))}
       </div>
-    </div>
+    </nav>
   );
 };
 

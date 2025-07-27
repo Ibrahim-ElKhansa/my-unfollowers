@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
+import Script from 'next/script';
 import { track } from '@vercel/analytics';
 import FileInput from '@/components/FileInput';
 import Tabs from '@/components/Tabs';
 import UserList from '@/components/UserList';
 import Tutorial from '@/components/Tutorial';
-import Watermark from '@/components/Watermark';
+import Footer from '@/components/Footer';
+import { websiteStructuredData } from '@/lib/structured-data';
 import { 
   ProcessedUser, 
   TabType 
@@ -174,9 +176,17 @@ export default function Home() {
 
   return (
     <>
-      <div className="main-container__title">
+      <Script
+        id="website-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteStructuredData),
+        }}
+      />
+      
+      <header className="main-container__title">
         <h1>Instagram Unfollowers Analyzer</h1>
-      </div>
+      </header>
       
       <p className="main-container__subtitle">
         Upload your Instagram data exports to analyze your followers and followings. 
@@ -186,7 +196,7 @@ export default function Home() {
       <Tutorial />
 
       {!isDataValid && (
-        <div className="file-inputs">
+        <section className="file-inputs" aria-label="File upload section">
           <div className="file-inputs__container">
             <FileInput
               label="Followers JSON"
@@ -202,23 +212,23 @@ export default function Home() {
               isValid={isFollowingValid}
             />
           </div>
-        </div>
+        </section>
       )}
 
       {validationErrors.length > 0 && (
-        <div className="validation-errors">
+        <aside className="validation-errors" role="alert">
           <h3>Validation Errors:</h3>
           <ul>
             {validationErrors.map((error, index) => (
               <li key={index}>{error}</li>
             ))}
           </ul>
-        </div>
+        </aside>
       )}
 
       {isDataValid && (
-        <>
-          <div className="settings">
+        <main>
+          <section className="settings" aria-label="User settings">
             <div className="settings__container">
               <h3 className="settings__title">⚙️ Settings</h3>
               <div className="settings__option">
@@ -259,7 +269,7 @@ export default function Home() {
                 </button>
               </div>
             </div>
-          </div>
+          </section>
 
           <Tabs
             activeTab={activeTab}
@@ -274,10 +284,10 @@ export default function Home() {
             onLinkClick={handleLinkClick}
             title={getTabTitle()}
           />
-        </>
+        </main>
       )}
       
-      <Watermark />
+      <Footer />
     </>
   );
 }

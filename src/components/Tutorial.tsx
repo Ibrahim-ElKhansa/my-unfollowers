@@ -38,23 +38,24 @@ const Tutorial: React.FC = () => {
   ];
 
   return (
-    <div className="tutorial">
-      <div className="tutorial__header">
-        <h3 className="tutorial__title">📱 How to Download Your Instagram Data</h3>
+    <section className="tutorial" aria-labelledby="tutorial-title">
+      <header className="tutorial__header">
+        <h3 id="tutorial-title" className="tutorial__title">📱 How to Download Your Instagram Data</h3>
         <button 
           className="tutorial__toggle"
           onClick={() => setIsExpanded(!isExpanded)}
           aria-expanded={isExpanded}
+          aria-controls="tutorial-content"
         >
           {isExpanded ? 'Hide Tutorial' : 'Show Tutorial'}
           <span className={`tutorial__arrow ${isExpanded ? 'tutorial__arrow--up' : ''}`}>
             ▼
           </span>
         </button>
-      </div>
+      </header>
       
       {isExpanded && (
-        <div className="tutorial__content">
+        <div id="tutorial-content" className="tutorial__content">
           <div className="tutorial__intro">
             <p>
               Download your Instagram data using their official export feature. 
@@ -62,27 +63,27 @@ const Tutorial: React.FC = () => {
             </p>
           </div>
           
-          <div className="tutorial__steps">
+          <ol className="tutorial__steps">
             {steps.map((step) => (
-              <div key={step.step} className="tutorial__step">
+              <li key={step.step} className="tutorial__step">
                 <div className="tutorial__step-number">{step.step}</div>
-                <div className="tutorial__step-content">
+                <article className="tutorial__step-content">
                   <h4 className="tutorial__step-title">{step.title}</h4>
                   <p className="tutorial__step-description">{step.description}</p>
                   {step.image && (
-                    <div className="tutorial__step-image-container">
+                    <figure className="tutorial__step-image-container">
                       <Image
                         src={step.image}
                         alt={`Step ${step.step}: ${step.title}`}
                         fill
                         className="tutorial__step-image"
                       />
-                    </div>
+                    </figure>
                   )}
-                </div>
-              </div>
+                </article>
+              </li>
             ))}
-          </div>
+          </ol>
           
           <div className="tutorial__note">
             <div className="tutorial__note-icon">🔒</div>
@@ -121,7 +122,7 @@ const Tutorial: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

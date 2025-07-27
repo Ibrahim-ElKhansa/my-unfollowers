@@ -1,13 +1,13 @@
 @use './variables' as *;
 
-.watermark {
+.footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   margin-top: clamp(2rem, 4vw, 3rem);
   padding: clamp(1rem, 3vw, 1.5rem) 0;
-  
+
   &::before {
     content: '';
     width: min(200px, 60%);
@@ -15,25 +15,53 @@
     background: $text-muted;
     margin-bottom: clamp(1rem, 2vw, 1.5rem);
   }
-  
+
   &__link {
-    color: $text-muted;
-    text-decoration: none;
+    color: $primary-light;
+    text-decoration: underline;
     font-size: clamp(0.75rem, 1.8vw, 0.85rem);
     font-weight: 400;
     transition: color 0.2s ease;
-    
+    margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+
     &:hover {
-      color: $text-secondary;
+      color: $primary-color;
     }
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.5rem, 1vw, 0.75rem);
+  }
+
+  &__nav-link {
+    color: $primary-light;
+    text-decoration: none;
+    font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin-bottom: 0.5rem;
+
+    &:hover {
+      color: $primary-color;
+      text-decoration: underline;
+    }
+  }
+
+  &__nav-separator {
+    color: $text-muted;
+    font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+    user-select: none;
   }
 }
 
 @media (max-width: 768px) {
-  .watermark {
+  .footer {
     margin-top: clamp(1.5rem, 3vw, 2rem);
     padding: clamp(0.75rem, 2vw, 1rem) 0;
-    
+
     &::before {
       width: min(150px, 70%);
       margin-bottom: clamp(0.75rem, 1.5vw, 1rem);

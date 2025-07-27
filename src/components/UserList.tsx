@@ -17,20 +17,20 @@ const UserList: React.FC<UserListProps> = ({ users, hiddenUsers, onHideUser, onL
   };
 
   return (
-    <div className="user-list">
-      <div className="user-list__header">
-        <h2 className="user-list__title">{title}</h2>
+    <section className="user-list" aria-labelledby="user-list-title">
+      <header className="user-list__header">
+        <h2 id="user-list-title" className="user-list__title">{title}</h2>
         <span className="user-list__count">{visibleUsers.length} users</span>
-      </div>
+      </header>
       
       {visibleUsers.length === 0 ? (
         <div className="user-list__empty">
           <p>No users to display</p>
         </div>
       ) : (
-        <div className="user-list__container">
+        <ul className="user-list__container">
           {visibleUsers.map((user) => (
-            <div key={user.username} className="user-list__item">
+            <li key={user.username} className="user-list__item">
               <div className="user-list__info">
                 <a 
                   href={user.href} 
@@ -41,22 +41,23 @@ const UserList: React.FC<UserListProps> = ({ users, hiddenUsers, onHideUser, onL
                 >
                   @{user.username}
                 </a>
-                <span className="user-list__date">
+                <time className="user-list__date" dateTime={new Date(user.timestamp * 1000).toISOString()}>
                   {formatDate(user.timestamp)}
-                </span>
+                </time>
               </div>
               <button
                 className="user-list__hide-btn"
                 onClick={() => onHideUser(user.username)}
                 title="Hide from list"
+                aria-label={`Hide ${user.username} from list`}
               >
                 ✕
               </button>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-    </div>
+    </section>
   );
 };
 
