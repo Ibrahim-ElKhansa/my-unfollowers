@@ -217,10 +217,10 @@ export default function Home() {
 
       {validationErrors.length > 0 && (
         <aside className="validation-errors" role="alert">
-          <h3>Validation Errors:</h3>
-          <ul>
+          <h3 className="validation-errors__title">Validation Errors:</h3>
+          <ul className="validation-errors__list">
             {validationErrors.map((error, index) => (
-              <li key={index}>{error}</li>
+              <li key={index} className="validation-errors__item">{error}</li>
             ))}
           </ul>
         </aside>

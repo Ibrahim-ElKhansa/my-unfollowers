@@ -55,10 +55,8 @@
     font-size: clamp(0.75rem, 1.8vw, 0.85rem);
     user-select: none;
   }
-}
-
-@media (max-width: 768px) {
-  .footer {
+  
+  @media (max-width: 768px) {
     margin-top: clamp(1.5rem, 3vw, 2rem);
     padding: clamp(0.75rem, 2vw, 1rem) 0;
 

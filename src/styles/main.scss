@@ -3,11 +3,14 @@
 @use './reset';
 
 // Import component styles
-@use './maincontainer';
-@use './fileinput';
+@use './main-container';
+@use './file-input';
+@use './file-inputs';
+@use './validation-errors';
 @use './tabs';
-@use './userlist';
+@use './user-list';
 @use './tutorial';
 @use './settings';
 @use './footer';
-@use './pages';
+@use './faq-page';
+@use './privacy-page';
